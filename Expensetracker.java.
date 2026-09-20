@@ -1,0 +1,69 @@
+import java.util.Scanner;
+
+class Expense {
+    String title;
+    double amount;
+
+    Expense(String title, double amount) {
+        this.title = title;
+        this.amount = amount;
+    }
+}
+public class Expensetracker {
+    public static void main(String[] args) {;
+
+        Scanner sc = new Scanner(System.in);
+        Expense[]list= new Expense[100];
+        int count=0;
+        int choice=0;
+         while (choice!=4) {
+            System.out.println("\n1.Add expense");
+            System.out.println("2.View expenses");
+            System.out.println("3.Delete expense");
+            System.out.println("4.Exit");
+            System.out.print("Enter your choice: ");
+            choice = sc.nextInt();
+            sc.nextLine();
+
+            if (choice == 1) {
+                if (count ==100) {
+                    System.out.println("Expense list is full.");
+                } else {
+                    System.out.print("Spent on: ");
+                 String item = sc.nextLine();
+                    System.out.print("Amount: ");
+                    double amount = sc.nextDouble();
+                    list[count] = new Expense(item, amount);
+                    count++;
+                }
+                System.out.println("expense added!"); 
+            } else if (choice == 2) {
+                if(count==0){
+                    System.out.println("No expenses to show.");
+                } else {
+                    double total = 0;
+                    for (int i = 0; i < count; i++) {
+                        System.out.println((i + 1) + ". " + list[i].title + " - Rs. " + list[i].amount);
+                        total += list[i].amount;
+                    }
+                    System.out.println("Total: Rs. " + total);
+                }
+} else if (choice == 3) {
+                System.out.print("Enter number to delete: ");
+                int n = sc.nextInt();
+                if (n < 1 || n > count) {
+                    System.out.println("wrong number");
+                } else {
+                    for (int i = n - 1; i < count - 1; i++) {
+                        list[i] = list[i + 1];
+                    }
+                    count--;
+                    System.out.println("Expense deleted!");
+                }
+
+            } else if (choice == 4) {
+                break;
+            }
+        }
+    }
+}
